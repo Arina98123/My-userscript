@@ -2,23 +2,23 @@
 // @name         Rainbet Currency Patch (FUN → RUB)
 // @namespace    http://tampermonkey.net/
 // @version      1.3
-// @description  Replaces FUN currency with RUB or USD in Rainbet Aviamasters init responses 
-// @match https://rainbet.com*
+// @description  Replaces FUN currency with RUB or USD in Rainbet Aviamasters init responses
+// @match        https://rainbet.com/*
 // @grant        none
 // @run-at       document-start
-
 // ==/UserScript==
 
 (function () {
     'use strict';
 
-  
+    const desiredCurrency = "RUB"; // или "USD"
+    const desiredSymbol   = desiredCurrency === "USD" ? "$" : "₽";
+
     const originalFetch = window.fetch;
 
     window.fetch = async (...args) => {
         const [url, config] = args;
 
-   
         const isTarget = url.includes("/api/rainbet/") &&
                          config?.method?.toUpperCase() === "POST" &&
                          config?.body?.includes('"command":"init"');
@@ -31,16 +31,14 @@
             const json = await cloned.json();
 
             if (
-                json?.options?.currency?.code = "RUB" &&
-                json?.flow?.command = "init"
+                json?.options?.currency?.code === "FUN" &&
+                json?.flow?.command === "init"
             ) {
-                console.log("[TM] Patching currency FUN → RUB");
+                console.log(`[TM] Patching currency FUN → ${desiredCurrency}`);
 
- 
-                json.options.currency.code = "RUB";
-                json.options.currency.symbol = "₽";
+                json.options.currency.code = desiredCurrency;
+                json.options.currency.symbol = desiredSymbol;
 
- 
                 return new Response(JSON.stringify(json), {
                     status: response.status,
                     statusText: response.statusText,
