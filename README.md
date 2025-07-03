@@ -2,7 +2,7 @@
 // @name         Rainbet Currency Patch (FUN → RUB)
 // @namespace    http://tampermonkey.net/
 // @version      1.2
-// @description  Replaces FUN currency with RUB in BGaming Aviamasters init responses only
+// @description  Replaces FUN currency with RUB in Rainbet Aviamasters init responses only
 // @match        https://demo.rainbet-network.com/games/Aviamasters/*
 // @grant        none
 // @run-at       document-start
