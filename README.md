@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.2
 // @description  Replaces FUN currency with RUB in Rainbet Aviamasters init responses only
-// @match    https://rainbet.com/ru/casino/slots/bgaming-rainbet-aviamasters?play=fun/*
+// @match    @match https://rainbet.com/ru/casino/slots/bgaming-rainbet-aviamasters*
 // @grant        none
 // @run-at       document-start
 // @noframes
