@@ -19,7 +19,7 @@
         const [url, config] = args;
 
    
-        const isTarget = url.includes("/api/Aviamasters/") &&
+        const isTarget = url.includes("/api/rainbet/") &&
                          config?.method?.toUpperCase() === "POST" &&
                          config?.body?.includes('"command":"init"');
 
